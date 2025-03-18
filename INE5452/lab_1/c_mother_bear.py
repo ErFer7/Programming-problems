@@ -2,7 +2,7 @@
 Mother bear.
 """
 
-translation = str.maketrans({'.': '', ',': '', '!': '', '?': '', ' ':''})
+translation = str.maketrans({'.': '', ',': '', '!': '', '?': '', ' ': ''})
 
 while True:
     value = input()
@@ -16,4 +16,3 @@ while True:
         print('You won\'t be eaten!')
     else:
         print('Uh oh..')
-    

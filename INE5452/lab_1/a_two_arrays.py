@@ -12,5 +12,5 @@ for test in range(test_count):
     if distinct_count_a + distinct_count_b > 3:
         print('YES')
         continue
-    
+
     print('NO')
