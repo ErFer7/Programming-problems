@@ -1,9 +1,11 @@
 # Custom
 .vscode
-input.txt
-output.txt
-testcheck.txt
 Run-Script.ps1
+*
+!*/
+!*.*
+!makefile
+*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
