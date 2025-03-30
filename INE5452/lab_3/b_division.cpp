@@ -1,6 +1,6 @@
+#include <iomanip>
 #include <iostream>
 #include <ostream>
-#include <iomanip>
 
 using std::cin;
 using std::cout;
@@ -84,7 +84,8 @@ int main() {
             if (result * denominator == numerator && result == number) {
                 has_result = true;
 
-                cout << std::setfill('0') << std::setw(5) << numerator << " / " << std::setfill('0') << std::setw(5) <<  denominator << " = " << number << endl;
+                cout << std::setfill('0') << std::setw(5) << numerator << " / " << std::setfill('0') << std::setw(5) << denominator << " = "
+                     << number << endl;
             }
         }
 
