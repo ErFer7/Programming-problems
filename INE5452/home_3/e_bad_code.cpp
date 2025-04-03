@@ -96,9 +96,6 @@ int main() {
 
         cin >> message;
 
-        bool stop = false;
-        int incomplete_nodes = 1;
-
         std::vector<std::string> decoded_messages;
         decode(letter_count, code_letter_table, message, "", decoded_messages);
 
