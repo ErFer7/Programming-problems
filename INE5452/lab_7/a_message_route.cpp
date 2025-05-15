@@ -6,7 +6,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-const int MAX_SIZE = 100000;
+const int MAX_SIZE = 100001;
 
 std::vector<int> graph[MAX_SIZE];
 int parents[MAX_SIZE];
