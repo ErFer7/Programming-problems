@@ -5,13 +5,9 @@ struct Point {
     int x;
     int y;
 
-    bool operator <(const Point &point) const {
-        return x < point.x || (x == point.x && y < point.y);
-    }
+    bool operator<(const Point &point) const { return x < point.x || (x == point.x && y < point.y); }
 
-    bool operator ==(const Point &point) const {
-        return x == point.x && y == point.y;
-    }
+    bool operator==(const Point &point) const { return x == point.x && y == point.y; }
 };
 
 int cross(const Point &origin, const Point &point_a, const Point &point_b) {
@@ -30,18 +26,20 @@ int main() {
             break;
         }
 
-        Point points[10000]; 
-        
+        Point points[10000];
+
         for (int i = 0; i < point_count; i++) {
             int x;
             int y;
             std::cin >> x >> y;
+
             points[i] = Point{x, y};
         }
-        
+
         if (point_count == 1) {
             std::cout << 1 << std::endl;
             std::cout << points[0].x << ' ' << points[0].y << std::endl;
+
             continue;
         }
 
@@ -57,6 +55,7 @@ int main() {
         if (all_identical) {
             std::cout << 1 << std::endl;
             std::cout << points[0].x << ' ' << points[0].y << std::endl;
+
             continue;
         }
 
@@ -74,7 +73,8 @@ int main() {
             convex_hull[k++] = points[i];
         }
 
-        int t = k + 1; 
+        int t = k + 1;
+
         for (int i = point_count - 1; i > 0; i--) {
             while (k >= t && cross(convex_hull[k - 2], convex_hull[k - 1], points[i - 1]) <= 0) {
                 k--;
@@ -83,7 +83,7 @@ int main() {
             convex_hull[k++] = points[i - 1];
         }
 
-        std::cout << k - 1 << std::endl; 
+        std::cout << k - 1 << std::endl;
 
         for (int i = 0; i < k - 1; i++) {
             std::cout << convex_hull[i].x << ' ' << convex_hull[i].y << std::endl;
