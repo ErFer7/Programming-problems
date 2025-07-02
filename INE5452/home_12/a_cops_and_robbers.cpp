@@ -1,6 +1,11 @@
+#include <math.h>
+
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
 #include <vector>
+
+const float EPSILON = 1e-9;
 
 struct Point {
     int x;
@@ -13,6 +18,11 @@ struct Point {
 
 int cross(const Point &origin, const Point &point_a, const Point &point_b) {
     return (point_a.x - origin.x) * (point_b.y - origin.y) - (point_a.y - origin.y) * (point_b.x - origin.x);
+}
+
+float distance(const Point &point_a, const Point &point_b) {
+    return std::sqrt(
+        static_cast<float>((point_b.x - point_a.x) * (point_b.x - point_a.x) + (point_b.y - point_a.y) * (point_b.y - point_a.y)));
 }
 
 std::vector<Point> create_convex_hull(std::vector<Point> &points) {
@@ -55,26 +65,43 @@ bool is_point_inside_hull(Point point, const std::vector<Point> &hull) {
         return false;
     }
 
-    int n = hull.size();
-
+    int hull_size = hull.size();
     bool is_clockwise = cross(hull[0], hull[1], hull[2]) < 0;
+    bool is_inside = true;
 
-    for (int i = 0; i < n; i++) {
-        int next = (i + 1) % n;
+    for (int i = 0; i < hull_size; i++) {
+        int next = (i + 1) % hull_size;
+
+        if (point == hull[i] || point == hull[next]) {
+            return true;
+        }
+
         int cross_product = cross(hull[i], hull[next], point);
 
-        if (is_clockwise) {
-            if (cross_product > 0) {
-                return false;
+        if (cross_product != 0) {
+            if (is_clockwise) {
+                if (cross_product < 0) {
+                    is_inside = true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (cross_product > 0) {
+                    is_inside = true;
+                } else {
+                    return false;
+                }
             }
         } else {
-            if (cross_product < 0) {
-                return false;
+            if (std::abs(distance(point, hull[i]) + distance(point, hull[next]) - distance(hull[i], hull[next])) < EPSILON) {
+                return true;
+            } else {
+                is_inside = false;
             }
         }
     }
 
-    return true;
+    return is_inside;
 }
 
 int main() {
